@@ -38,3 +38,13 @@ do
 done
 
 echo "[$TIMESTAMP] Cleanup done.. $backup_count backups retained." | tee -a "$LOG_FILE"
+
+# --- S3 Upload ---
+S3_BUCKET="s3://sentinelops-backup-pratik"
+echo "[$TIMESTAMP] Uploading backup to S3..." | tee -a "$LOG_FILE"
+aws s3 cp "$BACKUP_DIR/$BACKUP_NAME" "$S3_BUCKET/"
+if [ $? -eq 0 ]; then
+  echo "[$TIMESTAMP] Upload successful: $BACKUP_NAME" | tee -a "$LOG_FILE"
+else
+  echo "[$TIMESTAMP] ERROR: Upload failed!" | tee -a "$LOG_FILE"
+fi
