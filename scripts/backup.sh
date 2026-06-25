@@ -16,6 +16,17 @@ LOG_FILE="/home/pratik04/SentinelOps/logs/backup.log"
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 BACKUP_NAME="backup_$TIMESTAMP.tar.gz"
 
+# --- Pre-flight Checks ---
+if [ ! -d "$SOURCE_DIR" ]; then
+  echo "[$TIMESTAMP] ERROR: Source directory not found: $SOURCE_DIR" | tee -a "$LOG_FILE"
+  exit 1
+fi
+
+if [ ! -d "$BACKUP_DIR" ]; then
+  echo "[$TIMESTAMP] ERROR: Backup directory not found: $BACKUP_DIR" | tee -a "$LOG_FILE"
+  exit 1
+fi
+
 #--- Create Backup ---
 
 echo "[$TIMESTAMP] Starting backup..." | tee -a "$LOG_FILE"
