@@ -29,7 +29,7 @@ SentinelOps/
 
 └── scripts/      # Shell scripts + Python scripts
 
-## Usage
+## Usage of backup 
 ```bash
 # Run backup script
 bash scripts/backup.sh
